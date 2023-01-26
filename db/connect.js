@@ -1,6 +1,6 @@
 const { Sequelize } = require("sequelize");
 
-async function connectDatabase(app) {
+async function connectDatabase() {
   // Option 3: Passing parameters separately (other dialects)
   const database=`ntllkemy_towing`;
   const user=`ntllkemy_towing1`;
