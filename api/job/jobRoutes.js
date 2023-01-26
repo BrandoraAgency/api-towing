@@ -1,4 +1,3 @@
-const { paginatedResult } = require("../middleware/jobMiddleware")
 const { getJobs, getJobDetails, createJob, updateJob, deleteJob } = require("./job")
 
 module.exports=(app)=>{

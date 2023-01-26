@@ -20,13 +20,13 @@ const getUser = (req, res) => {
 const userLogin = (req, res) => {
   if (!req.user) return res.status(400).json({ message: 'Invalid Found' })
   const foundUser = req.user;
-  const role = req.role;
   req.session.user=foundUser;
   req.session.auth=true;
   res.status(200).json({
     userid: foundUser.id,
     emai: foundUser.email,
-    role: role,
+    role: foundUser.role,
+    to:foundUser.passto,
     firstName: foundUser.firstName,
     lastName: foundUser.lastName, 
   })
@@ -35,23 +35,34 @@ const userLogin = (req, res) => {
 const userRegister = async (req, res) => {
   const userBody = req.body;
   let password = crypto.createHash('md5').update(userBody.password).digest("hex")
+  userBody.password=password;
   try {
-    const user = await User.create({
-      firstName: userBody.firstName,
-      lastName: userBody.lastName,
-      email: userBody.email,
-      password: password,
-      role: userBody.role,
-    });
+    const user = await User.create(userBody);
     res.status(200).json({ message: 'user created', userId: user.id })
-  } catch (error) { }
-};
+  } catch (error) { 
+    res.status(200).json({ message: 'user not created',error:error })
 
+
+  }
+};
+const getUsers=async(req,res)=>{
+  try {
+    const users = await User.findAll({
+      attributes: ["id","email","role"],
+    });
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(400).json({
+      message: "users Not Found",
+    });
+  }
+}
 module.exports = {
   //on loggin user
   userLogin,
   //Create user on Register
   userRegister,
   //get user Info
-  getUser
+  getUser,
+  getUsers,
 };

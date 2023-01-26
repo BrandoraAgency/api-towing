@@ -5,7 +5,10 @@ const cors = require('cors')
 const cookieParser = require("cookie-parser");
 const bodyParser = require('body-parser')
 const session = require('express-session');
+const db = require('./models');
+const fileUpload = require('express-fileupload');
 const port = process.env.PORT || 3001;
+app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 var corsOptions = {
@@ -14,6 +17,7 @@ var corsOptions = {
   credentials:true
 }
 app.use(cors(corsOptions))
+app.use(fileUpload());
 app.use(cookieParser());
 app.use(session({
   name:'userID',
@@ -31,9 +35,8 @@ connectDatabase(app)
 app.get('/', (req, res) => {
   res.json({message:'Hello World!'})
 })
-
-// db.sequelize.sync().then((req)=>{
+db.sequelize.sync().then((req)=>{
   app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
   })
-// })
+})

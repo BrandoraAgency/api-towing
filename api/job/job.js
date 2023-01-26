@@ -3,10 +3,10 @@ const { sequelize } = require("../../models");
 const { Job,JobLog,TowingCompany } = require("../../models/Role")(sequelize, DataTypes);
 
 const getJobs = async (req, res) => {
-  const id = req.query.role;
-  console.log(id);
+  const role = req.query.role;
+  console.log(role);
   try {
-    const Jobs = await Job.findAll({ where: { assignto: id } });
+    const Jobs = await Job.findAll({ where: { assignto: role } });
     if (Jobs === null) {
       res.status(400).json({
         message: "Not Found",
@@ -70,7 +70,7 @@ const updateJob = async (req, res) => {
       },
     });
     res.status(200).json({
-      message: "job Updates",
+      message: "job Updated",
     });
   } catch (error) {
     res.status(400).json({
@@ -78,6 +78,7 @@ const updateJob = async (req, res) => {
     });
   }
 };
+
 
 const deleteJob = (req, res) => {};
 

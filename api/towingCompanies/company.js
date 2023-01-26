@@ -1,3 +1,61 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../../models");
-const { TowingCompany } = require("../../models/Role")(sequelize, DataTypes)
+const { TowingCompany,Job } = require("../../models/Role")(sequelize, DataTypes);
+
+const AddCompany = async (req, res) => {
+  const companybody = req.body.company;
+  const id = req.body.id;
+  try {
+    const company = await TowingCompany.create(companybody);
+    console.log(companybody);
+    await Job.update({
+      towingCompany:company.id
+    }, {
+      where: {
+        id: id,
+      },
+    });
+    res.status(200).json({
+      message: "Company Added",
+      companyID: company.id,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({
+      message: "Company Not Added",
+    });
+  }
+};
+
+const UpdateCompany = async (req, res) => {
+  const companybody = req.body;
+  try {
+    await TowingCompany.update(companybody.company, {
+      where: {
+        id: companybody.id,
+      },
+    });
+    res.status(200).json({
+      message: "Company Updated",
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: "Company Not Updated",
+    });
+  }
+};
+const GetCompany = async (req, res) => {
+  try {
+    const companies = await TowingCompany.findAll();
+    res.status(200).json(companies);
+  } catch (error) {
+    res.status(400).json({
+      message: "Company Not Found",
+    });
+  }
+};
+module.exports = {
+  AddCompany,
+  UpdateCompany,
+  GetCompany
+};

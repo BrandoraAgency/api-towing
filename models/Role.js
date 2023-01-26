@@ -1,29 +1,4 @@
 module.exports = (sequelize, DataTypes) => {
-  const Role = sequelize.define(
-    "role",
-    {
-      id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
-      type: {
-        type: DataTypes.STRING,
-      },
-    },
-    {
-      timestamps: false,
-    }
-  );
-  const session=sequelize.define("Session", {
-    sid: {
-      type: DataTypes.STRING,
-      primaryKey: true,
-    },
-    userId: DataTypes.STRING,
-    expires: DataTypes.DATE,
-    data: DataTypes.TEXT,
-  });
   const User = sequelize.define(
     "user",
     {
@@ -34,16 +9,25 @@ module.exports = (sequelize, DataTypes) => {
       },
       email: {
         type: DataTypes.STRING,
+        allowNull: false,
       },
       password: {
         type: DataTypes.STRING,
+        allowNull: false,
       },
       role: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: Role,
-          key: "id",
-        },
+        type: DataTypes.ENUM,
+        allowNull: false,
+        values: ['admin', 'accountant', 'qc','dispatch','sales'],
+      },
+      passto: {
+        type: DataTypes.ENUM,
+        allowNull: false,
+        values: ['admin', 'accountant', 'qc','dispatch'],
+      },
+      access:{
+        type: DataTypes.STRING,
+        allowNull: false,
       },
       firstName: {
         type: DataTypes.STRING,
@@ -78,10 +62,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
       },
       contact: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING(100),
       },
       phone: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING(50),
       },
       zipCode: {
         type: DataTypes.STRING,
@@ -153,6 +137,9 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.TIME,
       },
       charged_status: {
+        type: DataTypes.STRING,
+      },
+      jobStatus: {
         type: DataTypes.STRING,
       },
       firstName: {
@@ -307,7 +294,6 @@ module.exports = (sequelize, DataTypes) => {
   );
   
   return {
-    Role,
     User,
     TowingCompany,
     Job,

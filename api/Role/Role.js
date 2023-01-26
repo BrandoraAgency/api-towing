@@ -6,7 +6,6 @@ const getRoles = async (res, req) => {
   try {
     const role = await Role.findAll();
     req.status(200).json(role)
-    
   } catch (error) {
     
     req.status(400).json({
