@@ -2,9 +2,9 @@ const { Sequelize } = require("sequelize");
 
 async function connectDatabase(app) {
   // Option 3: Passing parameters separately (other dialects)
-  const database=`towing`;
-  const user=`root`;
-  const pass=`Mm.logic.sql.12`;
+  const database=`ntllkemy_towing`;
+  const user=`ntllkemy_towing1`;
+  const pass=`db.towing$record1`;
   const sequelize = new Sequelize(database, user, pass, {
     host: `localhost`,
     dialect:
