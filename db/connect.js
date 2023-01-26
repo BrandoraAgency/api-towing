@@ -7,7 +7,7 @@ async function connectDatabase() {
   const pass=`db.towing$record1`;
   console.log(database, user, pass);
   const sequelize = new Sequelize(database, user, pass, {
-    host: `11.102.0.26`,
+    host: `162.240.18.159`,
     dialect:
       'mysql' /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */,
   });
