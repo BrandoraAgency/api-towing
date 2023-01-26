@@ -5,6 +5,7 @@ async function connectDatabase(app) {
   const database=`ntllkemy_towing`;
   const user=`ntllkemy_towing1`;
   const pass=`db.towing$record1`;
+  console.log(database, user, pass);
   const sequelize = new Sequelize(database, user, pass, {
     host: `localhost`,
     dialect:
