@@ -21,7 +21,7 @@ app.use(fileUpload());
 app.use(cookieParser());
 app.use(session({
   name:'userID',
-  secret:"changeme",
+  secret:`ruaRIGs2JHuXec6N6k58OBDIvD6zL6I2kxEHaIou0oUsDRm5EH6yTdsZZDk7Ghj0V3dO7jHoQKcCwo6gXRXNgUhpbgwOeSg2k8wa`,
   saveUninitialized: false,
   cookie: {
     maxAge: 60 * 60 * 24 * 1000
