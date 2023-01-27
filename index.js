@@ -37,6 +37,6 @@ app.get('/api', (req, res) => {
 })
 db.sequelize.sync().then((req)=>{
   app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+    console.log(`Example app listening on port ${port} updated code`)
   })
 })
