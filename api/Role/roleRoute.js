@@ -1,8 +1,8 @@
 const { getRoles, CreateRoles } = require("./Role")
 
 module.exports=(app)=>{
-    app.get('/roles',getRoles)
-    app.post('/roles',CreateRoles)
-    // app.put('/roles',)
+    app.get('/api/roles',getRoles)
+    app.post('/api/roles',CreateRoles)
+    // app.put('/api/roles',)
     // app.delete('/roles',)
 }
