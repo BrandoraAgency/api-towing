@@ -32,7 +32,7 @@ require('./api/towingCompanies/companyRoute')(app)
 require('./api/job/jobRoutes')(app)
 require('./api/Role/roleRoute')(app)
 connectDatabase()
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
   res.json({message:'Hello World!'})
 })
 // db.sequelize.sync().then((req)=>{
