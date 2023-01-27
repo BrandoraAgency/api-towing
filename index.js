@@ -35,8 +35,8 @@ connectDatabase()
 app.get('/api', (req, res) => {
   res.json({message:'Hello World!'})
 })
-// db.sequelize.sync().then((req)=>{
+db.sequelize.sync().then((req)=>{
   app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
   })
-// })
+})
