@@ -21,7 +21,49 @@ const fetchUser = async(req, res, next) => {
         next()
     }
 }
+const userAccess=async(req,res,next)=>{
+    try {
+        const role=req.body.role;
+        if(role){
+            if(role==='admin')
+            {
+                req.body.passto="admin"
+                req.body.access='jobList,approved,company,stat'
+            }
+            else if(role==='accountant'){
+                req.body.passto="admin"
+                req.body.access='jobList,approved'
+                
+            }
+            else if(role==='qc'){
+                req.body.access='jobList,'
+                req.body.passto="accountant"
+                
+            }
+            else if(role==='dispatch'){
+                req.body.passto="qc"
+                req.body.access='newJob,jobList,company'
+                
+            }
+            else if(role==='sales'){
+                req.body.access='newJob'
+                req.body.passto="dispatch"
+            }
+            next()
+        }
+        else{
+            res.status(400).json({
+                message:"role not found"
+            })    
+        }
+    } catch (error) {
+        res.status(400).json({
+            message:"Try Again"
+        })
+    }
+}
 module.exports={
     //find user
-    fetchUser
+    fetchUser,
+    userAccess
 }

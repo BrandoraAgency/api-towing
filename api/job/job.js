@@ -4,9 +4,15 @@ const { Job,JobLog,TowingCompany } = require("../../models/Role")(sequelize, Dat
 
 const getJobs = async (req, res) => {
   const role = req.query.role;
-  console.log(role);
   try {
-    const Jobs = await Job.findAll({ where: { assignto: role } });
+    let Jobs;
+    if(req.session.user.role==='admin')
+    {
+       Jobs = await Job.findAll();
+    }
+    else{
+       Jobs = await Job.findAll({ where: { assignto: role } });
+    }
     if (Jobs === null) {
       res.status(400).json({
         message: "Not Found",

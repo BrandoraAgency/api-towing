@@ -2,12 +2,12 @@ const { Sequelize } = require("sequelize");
 
 async function connectDatabase() {
   // Option 3: Passing parameters separately (other dialects)
-  const database=`ntllkemy_towing`;
-  const user=`ntllkemy_towing1`;
-  const pass=`db.towing$record1`;
+  const database=process.env.LIVE_DB;
+  const user=process.env.LIVE_USER;
+  const pass=process.env.LIVE_PASS;
   console.log(database, user, pass);
   const sequelize = new Sequelize(database, user, pass, {
-    host: `162.240.18.159`,
+    host: process.env.LIVE_HOST,
     dialect:
       'mysql' /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */,
   });

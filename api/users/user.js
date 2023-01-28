@@ -33,16 +33,15 @@ const userLogin = (req, res) => {
 };
 
 const userRegister = async (req, res) => {
+  try {
   const userBody = req.body;
+  console.log(userBody);
   let password = crypto.createHash('md5').update(userBody.password).digest("hex")
   userBody.password=password;
-  try {
     const user = await User.create(userBody);
     res.status(200).json({ message: 'user created', userId: user.id })
-  } catch (error) { 
-    res.status(200).json({ message: 'user not created',error:error })
-
-
+  } catch (error) {
+    res.status(400).json({ message: 'user not created',error:error })
   }
 };
 const getUsers=async(req,res)=>{
@@ -57,6 +56,26 @@ const getUsers=async(req,res)=>{
     });
   }
 }
+
+const logout=async(req,res)=>{
+  try {
+    if(req.session.user){
+      req.session.user=null
+      res.status(200).json({
+        message:"Logged Out"
+      })
+    }
+    else{
+      res.status(200).json({
+        message:"Session timeout"
+      })
+    }
+  } catch (err) {
+    res.status(200).json({
+      message:"User not logeed out"
+    })
+  }
+}
 module.exports = {
   //on loggin user
   userLogin,
@@ -65,4 +84,5 @@ module.exports = {
   //get user Info
   getUser,
   getUsers,
+  logout
 };
