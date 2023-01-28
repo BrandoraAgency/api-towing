@@ -16,7 +16,7 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 var corsOptions = {
-  origin: "http://localhost:5173",
+  origin: "http://www.ntl.lke.mybluehost.me",
   methods: ["GET", "POST", "PUT"],
   credentials: true,
 };
