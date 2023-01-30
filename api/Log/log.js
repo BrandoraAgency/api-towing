@@ -1,6 +1,6 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../../models");
-const { JobLog } = require("../../models/Role")(sequelize, DataTypes)
+const { JobLog ,LogChange} = require("../../models/Role")(sequelize, DataTypes)
 
 const AddLog = async (req, res) => {
     const logBody = req.body;

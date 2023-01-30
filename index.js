@@ -10,13 +10,12 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 const db = require("./models");
 const fileUpload = require("express-fileupload");
-const { fs } = require("fs");
 const port = process.env.PORT || 3001;
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 var corsOptions = {
-  origin: "http://www.ntl.lke.mybluehost.me",
+  origin: process.env.CLIENT_URL,
   methods: ["GET", "POST", "PUT"],
   credentials: true,
 };
@@ -39,32 +38,6 @@ require("./api/job/jobRoutes")(app);
 require("./api/Role/roleRoute")(app);
 require("./api/ImgReciepts/ImgRecRoutes")(app);
 connectDatabase();
-
-app.post("/api/modify-pdf", async (req, res) => {
-  console.log('done');
-  try {
-    // Get the PDF file and modifications from the request
-    const pdfFile = req.files.pdfFile;
-    const modifications = req.body;
-
-    // Open the PDF
-    const pdfDoc = await pdfLib.PDFDocument.load(pdfFile.data);
-
-    // Make the desired modifications to the PDF (e.g. add text, remove pages, etc.)
-    // Code for modifications
-
-    // Generate the new PDF
-    const pdfBytes = await pdfDoc.save();
-
-    // Send the modified PDF back to the client as a download
-    res.setHeader("Content-Type", "application/pdf");
-    res.setHeader("Content-Disposition", "attachment; filename=modified.pdf");
-    res.send(pdfBytes);
-  } catch (err) {
-    console.log(err);
-    res.status(500).send(err.message);
-  }
-});
 
 app.get("/api/serve/:imageName", (req, res) => {
   const imageName = req.params.imageName;
