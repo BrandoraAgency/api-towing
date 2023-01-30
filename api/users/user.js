@@ -18,18 +18,25 @@ const getUser = (req, res) => {
 };
 
 const userLogin = (req, res) => {
-  if (!req.user) return res.status(400).json({ message: 'Invalid Found' })
-  const foundUser = req.user;
-  req.session.user=foundUser;
-  req.session.auth=true;
-  res.status(200).json({
-    userid: foundUser.id,
-    emai: foundUser.email,
-    role: foundUser.role,
-    to:foundUser.passto,
-    firstName: foundUser.firstName,
-    lastName: foundUser.lastName, 
-  })
+  try {
+    if (!req.user) return res.status(400).json({ message: 'Invalid Found' })
+    const foundUser = req.user;
+    req.session.user=foundUser;
+    req.session.auth=true;
+    res.status(200).json({
+      userid: foundUser.id,
+      emai: foundUser.email,
+      role: foundUser.role,
+      to:foundUser.passto,
+      firstName: foundUser.firstName,
+      lastName: foundUser.lastName, 
+    })
+    
+  } catch (error) {
+    res.status(200).json({
+      message:'user not found or error with the server'
+    })
+  }
 };
 
 const userRegister = async (req, res) => {
