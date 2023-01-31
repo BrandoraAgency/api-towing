@@ -99,7 +99,7 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      towingCompany: {
+      towing_id: {
         type: DataTypes.INTEGER,
         references: {
           model: TowingCompany,
@@ -190,7 +190,7 @@ module.exports = (sequelize, DataTypes) => {
       timestamps: false,
     }
   );
-
+  Job.belongsTo(TowingCompany, { foreignKey: 'towing_id' });
   const TowImage = sequelize.define(
     "towImage",
     {

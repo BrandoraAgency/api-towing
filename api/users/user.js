@@ -31,8 +31,8 @@ const userLogin = (req, res) => {
       firstName: foundUser.firstName,
       lastName: foundUser.lastName, 
     })
-    
   } catch (error) {
+    console.log(error);
     res.status(200).json({
       message:'user not found or error with the server'
     })

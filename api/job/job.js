@@ -8,10 +8,14 @@ const getJobs = async (req, res) => {
     let Jobs;
     if(req.session.user.role==='admin')
     {
-       Jobs = await Job.findAll();
+       Jobs = await Job.findAll({
+        include: [{ model: TowingCompany }]
+      });
     }
     else{
-       Jobs = await Job.findAll({ where: { assignto: role } });
+       Jobs = await Job.findAll({ where: { assignto: role } ,
+        include: [{ model: TowingCompany }]
+      });
     }
     if (Jobs === null) {
       res.status(400).json({
@@ -21,12 +25,30 @@ const getJobs = async (req, res) => {
       res.status(200).json(Jobs);
     }
   } catch (error) {
+    console.log(error);
     res.status(400).json({
       message: "Jobs Not Found",
     });
   }
 };
-
+const getApproved=async (req,res)=>{
+  try {
+    const Jobs = await Job.findAll({where: { isApproved: true } ,
+      include: [{ model: TowingCompany }]
+    });
+    if (Jobs === null) {
+      res.status(400).json({
+        message: "Not Found",
+      });
+    } else {
+      res.status(200).json(Jobs);
+    }
+  } catch (error) {
+    res.status(400).json({
+      message:'Approved not Found'
+    })
+  }
+}
 const getJobDetails = async (req, res) => {
   const id=req.query.id;
   console.log(id);
@@ -99,4 +121,5 @@ module.exports = {
   updateJob,
   //delete job
   deleteJob,
+  getApproved
 };
