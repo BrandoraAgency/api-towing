@@ -7,7 +7,6 @@ const AddCompany = async (req, res) => {
   const id = req.body.id;
   try {
     const company = await TowingCompany.create(companybody);
-    console.log(companybody);
     await Job.update({
       towing_id:company.id
     }, {
@@ -29,10 +28,11 @@ const AddCompany = async (req, res) => {
 
 const UpdateCompany = async (req, res) => {
   const companybody = req.body;
+  console.log(companybody);
   try {
     await TowingCompany.update(companybody.company, {
       where: {
-        id: companybody.id,
+        id: companybody.company.id,
       },
     });
     res.status(200).json({

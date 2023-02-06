@@ -13,7 +13,7 @@ const fetchRole = async (req, res, next) => {
     res.status(400).json({ message: "Role not Found" });
   } else {
     req.role = role.type;
-    next();
+    next(); 
   }
 };
 module.exports={

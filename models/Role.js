@@ -18,14 +18,14 @@ module.exports = (sequelize, DataTypes) => {
       role: {
         type: DataTypes.ENUM,
         allowNull: false,
-        values: ['admin', 'accountant', 'qc','dispatch','sales'],
+        values: ["admin", "accountant", "qc", "dispatch", "sales"],
       },
       passto: {
         type: DataTypes.ENUM,
         allowNull: false,
-        values: ['admin', 'accountant', 'qc','dispatch'],
+        values: ["admin", "accountant", "qc", "dispatch"],
       },
-      access:{
+      access: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -49,13 +49,13 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      pickUp:{
+      pickUp: {
         type: DataTypes.STRING,
       },
-      dropoff:{
+      dropoff: {
         type: DataTypes.STRING,
       },
-      Agent:{
+      Agent: {
         type: DataTypes.STRING,
       },
       name: {
@@ -70,27 +70,26 @@ module.exports = (sequelize, DataTypes) => {
       zipCode: {
         type: DataTypes.STRING,
       },
-      charged:{
+      charged: {
         type: DataTypes.INTEGER,
       },
-      paymentStatus:{
+      paymentStatus: {
         type: DataTypes.STRING,
       },
-      chargedDate:{
+      chargedDate: {
         type: DataTypes.DATE,
       },
-      chargedTime:{
+      chargedTime: {
         type: DataTypes.TIME,
       },
-      Notes:{
-        type: DataTypes.TEXT('long'),
+      Notes: {
+        type: DataTypes.TEXT("long"),
       },
     },
     {
       timestamps: false,
     }
   );
-
   const Job = sequelize.define(
     "job",
     {
@@ -176,21 +175,21 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
       },
       notes: {
-        type: DataTypes.TEXT('long'),
+        type: DataTypes.TEXT("long"),
       },
-      assignto:{
+      assignto: {
         type: DataTypes.STRING,
       },
-      isApproved:{
+      isApproved: {
         type: DataTypes.BOOLEAN,
-        defaultValue: false
+        defaultValue: false,
       },
     },
     {
       timestamps: false,
     }
   );
-  Job.belongsTo(TowingCompany, { foreignKey: 'towing_id' });
+  Job.belongsTo(TowingCompany, { foreignKey: "towing_id" });
   const TowImage = sequelize.define(
     "towImage",
     {
@@ -214,7 +213,7 @@ module.exports = (sequelize, DataTypes) => {
       timestamps: false,
     }
   );
-
+  Job.hasMany(TowImage, { foreignKey: "jobId" });
   const TowReceipt = sequelize.define(
     "towReceipt",
     {
@@ -238,9 +237,9 @@ module.exports = (sequelize, DataTypes) => {
       timestamps: false,
     }
   );
-
+  Job.hasMany(TowReceipt, { foreignKey: "jobId" });
   const JobLog = sequelize.define(
-    "jobLog",
+    "jobLogs",
     {
       id: {
         type: DataTypes.INTEGER,
@@ -261,14 +260,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATE,
       },
       user: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
       },
     },
     {
       timestamps: false,
     }
   );
-
+  Job.hasMany(JobLog, { foreignKey: "jobId" });
   const LogChange = sequelize.define(
     "logChange",
     {
@@ -292,7 +291,7 @@ module.exports = (sequelize, DataTypes) => {
       timestamps: false,
     }
   );
-  
+  JobLog.hasMany(LogChange, { foreignKey: "logId" });
   return {
     User,
     TowingCompany,

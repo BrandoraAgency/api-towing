@@ -15,7 +15,6 @@ const getRoles = async (res, req) => {
 };
 const CreateRoles = async (res, req) => {
   const rolebody=res.body;
-  console.log(rolebody);
   try {
     const role = await Role.create(rolebody);
     req.status(200).json({

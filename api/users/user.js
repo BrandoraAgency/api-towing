@@ -42,7 +42,6 @@ const userLogin = (req, res) => {
 const userRegister = async (req, res) => {
   try {
   const userBody = req.body;
-  console.log(userBody);
   let password = crypto.createHash('md5').update(userBody.password).digest("hex")
   userBody.password=password;
     const user = await User.create(userBody);

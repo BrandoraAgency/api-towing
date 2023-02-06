@@ -12,7 +12,6 @@ const fetchUser = async (req, res, next) => {
       return res.status(400).json({ errors: bodyErr.array() });
     // find user
     let authUser = req.body;
-    console.log(authUser);
     authUser.password = crypto
       .createHash("md5")
       .update(authUser.password)
@@ -20,7 +19,6 @@ const fetchUser = async (req, res, next) => {
     const user = await User.findOne({
       where: { email: authUser.email, password: authUser.password },
     });
-    console.log(authUser.email);
     if (user === null) {
       res.status(400).json({ message: "User not Found" });
     } else {

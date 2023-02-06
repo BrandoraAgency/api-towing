@@ -9,7 +9,6 @@ const getImages =async(req,res)=>{
   const id=req.query.id;
   try {
     const images = await TowImage.findAll({ where: { jobId: id } });
-    console.log(images);
     res.status(200).json(images);
   } catch (error) {
     res.status(400).json({
