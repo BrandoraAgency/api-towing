@@ -26,7 +26,8 @@ const fetchUser = async (req, res, next) => {
       next();
     }
   } catch (error) {
-    res.status(200).json({
+    console.log(error);
+    res.status(400).json({
       message: "error in finding user",
       error:error
     });
