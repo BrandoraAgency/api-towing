@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "ntllkemy_towing1",
-    "password": "ntllkemy_towing",
+    "password": "db.towing$record1",
     "database": "ntllkemy_towing",
     "host": "162.240.18.159",
     "dialect": "mysql"
