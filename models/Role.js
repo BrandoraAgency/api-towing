@@ -91,7 +91,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   const Job = sequelize.define(
-    "jo",
+    "job",
     {
       id: {
         type: DataTypes.INTEGER,
@@ -186,6 +186,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
+      tableName: 'jobs',
       timestamps: false,
     }
   );
