@@ -87,6 +87,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
+      tableName: 'towingCompany',
       timestamps: false,
     }
   );
@@ -211,6 +212,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
+      tableName: 'towImage',
       timestamps: false,
     }
   );
@@ -235,6 +237,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
+      tableName: 'towReceipt',
       timestamps: false,
     }
   );
@@ -265,6 +268,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
+      tableName: 'jobLogs',
       timestamps: false,
     }
   );
@@ -289,6 +293,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
+      tableName: 'logChange',
       timestamps: false,
     }
   );
