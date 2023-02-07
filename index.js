@@ -27,7 +27,7 @@ app.use(
     name: "userID",
     secret: `ruaRIGs2JHuXec6N6k58OBDIvD6zL6I2kxEHaIou0oUsDRm5EH6yTdsZZDk7Ghj0V3dO7jHoQKcCwo6gXRXNgUhpbgwOeSg2k8wa`,
     saveUninitialized: false,
-    resave:true,
+    resave:false,
     cookie: {
       maxAge: 60 * 60 * 24 * 1000,
     },
