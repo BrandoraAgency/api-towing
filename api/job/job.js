@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../../models");
 const { AddLog } = require("../Log/log");
-const { Job, JobLog,LogChange, TowingCompany, TowImage, TowReceipt } =
+const { Job, Company, JobLog, LogChange, TowingCompany, TowImage, TowReceipt } =
   require("../../models/Role")(sequelize, DataTypes);
 
 const getJobs = async (req, res) => {
@@ -84,7 +84,7 @@ const getJob = async (req, res) => {
   try {
     const jobDetails = await Job.findOne({
       where: { id: id },
-      include: [{ model: TowingCompany }],
+      include: [{ model: TowingCompany, include: [{ model: Company }] }],
     });
     //* if checks
     if (jobDetails === null)

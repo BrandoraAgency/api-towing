@@ -40,7 +40,52 @@ module.exports = (sequelize, DataTypes) => {
       timestamps: false,
     }
   );
-
+  const Company = sequelize.define(
+    "company",
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      phone: {
+        type: DataTypes.STRING(50),
+      },
+    },
+    {
+      tableName: "company",
+      timestamps: false,
+    }
+  );
+  const Rating = sequelize.define(
+    "rating",
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      companyId: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: Company,
+          key: "id",
+        },
+      },
+      rating: {
+        type: DataTypes.STRING(50),
+      },
+      user: {
+        type: DataTypes.INTEGER,
+      },
+    },
+    {
+      tableName: "rating",
+      timestamps: false,
+    }
+  );
+  Company.hasMany(Rating, { foreignKey: "companyId" });
+  Rating.belongsTo(Company, { foreignKey: "companyId" });
   const TowingCompany = sequelize.define(
     "towingCompany",
     {
@@ -48,6 +93,13 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
+      },
+      companyId: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: Company,
+          key: "id",
+        },
       },
       pickUp: {
         type: DataTypes.STRING,
@@ -63,9 +115,6 @@ module.exports = (sequelize, DataTypes) => {
       },
       contact: {
         type: DataTypes.STRING(100),
-      },
-      phone: {
-        type: DataTypes.STRING(50),
       },
       zipCode: {
         type: DataTypes.STRING,
@@ -87,10 +136,12 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: 'towingCompany',
+      tableName: "towingCompanies",
       timestamps: false,
     }
   );
+  TowingCompany.belongsTo(Company, { foreignKey: "companyId" });
+  Company.hasMany(TowingCompany, { foreignKey: "companyId" });
   const Job = sequelize.define(
     "job",
     {
@@ -187,7 +238,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: 'jobs',
+      tableName: "jobs",
       timestamps: false,
     }
   );
@@ -212,7 +263,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: 'towImage',
+      tableName: "towImages",
       timestamps: false,
     }
   );
@@ -237,7 +288,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: 'towReceipt',
+      tableName: "towReceipts",
       timestamps: false,
     }
   );
@@ -268,7 +319,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: 'jobLogs',
+      tableName: "jobLogs",
       timestamps: false,
     }
   );
@@ -293,7 +344,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: 'logChange',
+      tableName: "logChanges",
       timestamps: false,
     }
   );
@@ -306,5 +357,7 @@ module.exports = (sequelize, DataTypes) => {
     TowReceipt,
     JobLog,
     LogChange,
+    Company,
+    Rating
   };
 };
