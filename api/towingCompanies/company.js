@@ -1,4 +1,4 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes, Sequelize } = require("sequelize");
 const { sequelize } = require("../../models");
 const { TowingCompany, Job, Company, Rating } = require("../../models/Role")(
   sequelize,
@@ -34,18 +34,17 @@ const AddCompany = async (req, res) => {
 };
 const checkCompany = async (req, res, next) => {
   const companybody = req.body.company;
+  console.log(companybody);
   try {
     const company = await Company.findOne({
-      where: { phone: companybody.phone },
+      where: { phone: companybody.company.phone },
     });
     if (company === null) {
-      console.log("done");
       const newCompany = await Company.create({ phone: companybody.phone });
       delete req.body.company.phone;
       req.body.company.companyId = newCompany.id;
       next();
     } else {
-      console.log("not");
       delete req.body.company.phone;
       req.body.company.companyId = company.id;
       next();
@@ -60,12 +59,26 @@ const checkCompany = async (req, res, next) => {
 const addrating = async (req, res) => {
   const rating = req.body;
   try {
-    const newrating = await Rating.create(rating);
+    const ratingId = await Rating.findOne({
+      where: { companyId: rating.companyId, user: rating.user },
+    });
+    if (ratingId === null) {
+      const newrating = await Rating.create(rating);
+    } else {
+      await Rating.update(
+        { rating: rating.rating },
+        {
+          where: {
+            id: ratingId.id,
+          },
+        }
+      );
+    }
     res.status(200).json({
       message: "Rating Added",
-      ratingid: newrating.id,
     });
   } catch (error) {
+    console.log(error);
     res.status(400).json({
       message: "Rating Not Added",
     });
@@ -96,13 +109,28 @@ const GetCompany = async (req, res) => {
       include: [
         {
           model: TowingCompany,
+          attributes: ["name", "zipCode"],
+          group: ["companyId"],
           limit: 1,
         },
-        
+        {
+          model: Rating,
+          attributes: [
+            [Sequelize.fn("AVG", Sequelize.col("rating")), "averageRating"],
+            [sequelize.fn("GROUP_CONCAT", sequelize.col("user")), "users"],
+          ],
+          required: false,
+          duplicating: false,
+          group: ["companyId"],
+        },
       ],
+      group: ["company.id"],
+      // raw: true
     });
+    console.log(companies);
     res.status(200).json(companies);
   } catch (error) {
+    console.log(error);
     res.status(400).json({
       message: "Company Not Found",
     });

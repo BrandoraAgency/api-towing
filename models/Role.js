@@ -119,6 +119,12 @@ module.exports = (sequelize, DataTypes) => {
       zipCode: {
         type: DataTypes.STRING,
       },
+      Email: {
+        type: DataTypes.STRING,
+      },
+      address: {
+        type: DataTypes.STRING,
+      },
       charged: {
         type: DataTypes.INTEGER,
       },
@@ -170,6 +176,9 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
       },
       phone: {
+        type: DataTypes.STRING,
+      },
+      Email: {
         type: DataTypes.STRING,
       },
       providerID: {

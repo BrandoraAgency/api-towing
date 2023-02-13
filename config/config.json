@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": "Mm.logic.sql.12",
-    "database": "towing",
-    "host": "localhost",
+    "username": "ntllkemy_towing1",
+    "password": "db.towing$record1",
+    "database": "ntllkemy_towing",
+    "host": "162.240.18.159",
     "dialect": "mysql"
   },
   "test": {

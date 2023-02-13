@@ -1,8 +1,7 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../../models");
 const { AddLog } = require("../Log/log");
-const { Job, Company, JobLog, LogChange, TowingCompany, TowImage, TowReceipt } =
-  require("../../models/Role")(sequelize, DataTypes);
+const { Job, Company, JobLog, LogChange, TowingCompany, TowImage, TowReceipt } = require("../../models/Role")(sequelize, DataTypes);
 
 const getJobs = async (req, res) => {
   const role = req.query.role;
@@ -137,7 +136,23 @@ const updateJob = async (req, res) => {
   }
 };
 
-const deleteJob = (req, res) => {};
+const deleteJob = async(req, res) => {
+  const id= req.query.id;
+  try {
+    await Job.destroy({
+      where: {
+        id: id
+      }
+    });
+    res.status(200).json({
+      message:'Job Deleted'
+    })
+  } catch (error) {
+    res.status(400).json({
+      message:'Job not Deleted'
+    })
+  }
+};
 
 module.exports = {
   //get jobs list

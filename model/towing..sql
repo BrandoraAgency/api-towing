@@ -3,7 +3,6 @@ CREATE TABLE IF NOT EXISTS roles(
     type VARCHAR(255),
     PRIMARY KEY (id)
 );
-
 CREATE TABLE IF NOT EXISTS users(
     id int NOT NULL AUTO_INCREMENT,
     email varchar(255),
@@ -14,7 +13,6 @@ CREATE TABLE IF NOT EXISTS users(
     PRIMARY KEY (id),
     FOREIGN KEY (role) REFERENCES roles(id)
 );
-
 CREATE TABLE IF NOT EXISTS towingCompanies(
     id int NOT NULL AUTO_INCREMENT,
     name varchar(255),
@@ -23,7 +21,6 @@ CREATE TABLE IF NOT EXISTS towingCompanies(
     zipCode varchar(50),
     PRIMARY KEY (id)
 );
-
 CREATE TABLE IF NOT EXISTS jobs (
     id int NOT NULL AUTO_INCREMENT,
     towingCompany INT,
@@ -44,7 +41,6 @@ CREATE TABLE IF NOT EXISTS jobs (
     PRIMARY KEY (id),
     FOREIGN KEY (towingCompany) REFERENCES towingCompanies(id)
 );
-
 CREATE TABLE IF NOT EXISTS towImages(
     id int NOT NULL AUTO_INCREMENT,
     src varchar(255),
@@ -52,7 +48,6 @@ CREATE TABLE IF NOT EXISTS towImages(
     PRIMARY KEY (id),
     FOREIGN KEY (jobId) REFERENCES jobs(id)
 );
-
 CREATE TABLE IF NOT EXISTS towReciepts(
     id int NOT NULL AUTO_INCREMENT,
     src varchar(255),
@@ -60,7 +55,6 @@ CREATE TABLE IF NOT EXISTS towReciepts(
     PRIMARY KEY (id),
     FOREIGN KEY (jobId) REFERENCES jobs(id)
 );
-
 CREATE TABLE IF NOT EXISTS jobLogs(
     id int NOT NULL AUTO_INCREMENT,
     actions varchar(50),
@@ -70,7 +64,6 @@ CREATE TABLE IF NOT EXISTS jobLogs(
     PRIMARY KEY (id),
     FOREIGN KEY (jobId) REFERENCES jobs(id)
 );
-
 CREATE TABLE IF NOT EXISTS logChanges(
     id int NOT NULL AUTO_INCREMENT,
     changes VARCHAR(255),
