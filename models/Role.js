@@ -142,7 +142,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: "towingCompanies",
+      tableName: "towingCompany",
       timestamps: false,
     }
   );
@@ -272,7 +272,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: "towImages",
+      tableName: "towImage",
       timestamps: false,
     }
   );
@@ -297,13 +297,13 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: "towReceipts",
+      tableName: "towReceipt",
       timestamps: false,
     }
   );
   Job.hasMany(TowReceipt, { foreignKey: "jobId" });
   const JobLog = sequelize.define(
-    "jobLogs",
+    "jobLog",
     {
       id: {
         type: DataTypes.INTEGER,
@@ -328,7 +328,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: "jobLogs",
+      tableName: "jobLog",
       timestamps: false,
     }
   );
@@ -353,7 +353,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: "logChanges",
+      tableName: "logChange",
       timestamps: false,
     }
   );
