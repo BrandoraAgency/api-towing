@@ -7,5 +7,5 @@ module.exports=(app)=>{
     app.get('/api/editJob',getJob)
     app.post('/api/job',createJob)
     app.put('/api/job',updateJob)
-    // app.delete('/job',deleteJob)
+    app.delete('/api/job',deleteJob) 
 }

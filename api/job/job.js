@@ -147,6 +147,7 @@ const deleteJob = async(req, res) => {
       message:'Job Deleted'
     })
   } catch (error) {
+    console.log(error);
     res.status(400).json({
       message:'Job not Deleted'
     })

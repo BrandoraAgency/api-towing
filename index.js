@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 var corsOptions = {
   origin: [process.env.CLIENT_URL,process.env.CLIENT_URL1],
-  methods: ["GET", "POST", "PUT"],
+  methods: ["GET", "POST", "PUT","DELETE"],
   credentials: true,
 };
 app.use(cors(corsOptions));
