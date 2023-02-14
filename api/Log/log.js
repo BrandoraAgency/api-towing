@@ -14,6 +14,7 @@ const AddLog = async (role, action, jobID, logs) => {
         date: new Date(),
         user: role,
       };
+      console.log(newJobLog);
       await JobLog.create(newJobLog)
         .then((createdJobLog) => {
           let logsChanges = [];
