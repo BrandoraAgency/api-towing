@@ -5,10 +5,9 @@ const { JobLog, LogChange } = require("../../models/Role")(
   DataTypes
 );
 
-const AddLog = async (role,action,jobID, logs) => {
+const AddLog = async (role, action, jobID, logs) => {
   try {
-    if(JSON.stringify(logs) !== "{}")
-    {
+    if (JSON.stringify(logs) !== "{}") {
       const newJobLog = {
         actions: action,
         jobId: jobID,
@@ -17,12 +16,12 @@ const AddLog = async (role,action,jobID, logs) => {
       };
       await JobLog.create(newJobLog)
         .then((createdJobLog) => {
-          let logsChanges=[];
+          let logsChanges = [];
           for (let key in logs) {
             logsChanges.push({
-              changes:key+'----'+logs[key],
-              logId:createdJobLog.id
-            })
+              changes: key + "----" + logs[key],
+              logId: createdJobLog.id,
+            });
           }
           return LogChange.bulkCreate(logsChanges);
         })
@@ -30,13 +29,12 @@ const AddLog = async (role,action,jobID, logs) => {
           return true;
         })
         .catch((error) => {
-         return false
+          console.log(error);
+          return false;
         });
-
     }
-    
   } catch (error) {
-    
+    console.log(error);
   }
 };
 module.exports = {
