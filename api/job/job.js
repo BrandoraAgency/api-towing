@@ -124,7 +124,7 @@ const updateJob = async (req, res) => {
         id: id,
       },
     });
-    await AddLog(req.session.user.role, id, Jobupdates);
+    await AddLog(req.session.user.role,'Update', id, Jobupdates);
     res.status(200).json({
       message: "job Updated",
     });

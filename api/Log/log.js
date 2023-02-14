@@ -5,16 +5,15 @@ const { JobLog, LogChange } = require("../../models/Role")(
   DataTypes
 );
 
-const AddLog = async (action,jobID, logs) => {
+const AddLog = async (role,action,jobID, logs) => {
   try {
     if(JSON.stringify(logs) !== "{}")
     {
-
       const newJobLog = {
         actions: action,
         jobId: jobID,
         date: new Date(),
-        user: 'admin',
+        user: role,
       };
       await JobLog.create(newJobLog)
         .then((createdJobLog) => {
