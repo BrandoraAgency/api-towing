@@ -8,7 +8,6 @@ const { TowingCompany, Job, Company, Rating } = require("../../models/Role")(
 const AddCompany = async (req, res) => {
   const companybody = req.body.company;
   const id = req.body.id;
-  console.log(companybody);
   try {
     const company = await TowingCompany.create(companybody);
     await Job.update(
@@ -36,23 +35,32 @@ const checkCompany = async (req, res, next) => {
   const companybody = req.body.company;
   console.log(companybody);
   try {
-    const company = await Company.findOne({
-      where: { phone: companybody.company.phone },
-    });
-    if (company === null) {
-      const newCompany = await Company.create({ phone: companybody.phone });
-      delete req.body.company.phone;
-      req.body.company.companyId = newCompany.id;
-      next();
-    } else {
-      delete req.body.company.phone;
-      req.body.company.companyId = company.id;
-      next();
+    if(JSON.stringify(companybody.company) === "{}") return res.sendStatus(200)
+    if(companybody.company.phone)
+    {
+      const company = await Company.findOne({
+        where: { phone: companybody.company.phone },
+      });
+      if (company === null) {
+        const newCompany = await Company.create({ phone: companybody.company.phone });
+        delete req.body.company.phone;
+        req.body.company.companyId = newCompany.id;
+        next();
+      } else {
+        delete req.body.company.phone;
+        req.body.company.companyId = company.id;
+        next();
+      }
+    }
+    else{
+      res.status(400).json({
+        message: "Phone Null",
+      });
     }
   } catch (error) {
     console.log(error);
     res.status(400).json({
-      message: "Company Middleware Issu",
+      message: "Company Middleware Issue",
     });
   }
 };
@@ -86,7 +94,6 @@ const addrating = async (req, res) => {
 };
 const UpdateCompany = async (req, res) => {
   const companybody = req.body;
-  console.log(companybody);
   try {
     await TowingCompany.update(companybody.company, {
       where: {
@@ -127,7 +134,6 @@ const GetCompany = async (req, res) => {
       group: ["company.id"],
       // raw: true
     });
-    console.log(companies);
     res.status(200).json(companies);
   } catch (error) {
     console.log(error);

@@ -118,14 +118,13 @@ const createJob = async (req, res) => {
 const updateJob = async (req, res) => {
   const Jobupdates = req.body.job;
   const id = req.body.id;
-  console.log("edit", Jobupdates);
   try {
     await Job.update(Jobupdates, {
       where: {
         id: id,
       },
     });
-    await AddLog("updated", id, Jobupdates);
+    await AddLog(req.session.user.role, id, Jobupdates);
     res.status(200).json({
       message: "job Updated",
     });
