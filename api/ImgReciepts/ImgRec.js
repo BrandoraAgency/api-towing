@@ -42,6 +42,7 @@ const AddImage = async (req, res) => {
       imageID: image.id,
     });
   } catch (error) {
+    console.log(error);
     res.status(400).json({
       message: "Image Not Added",
     });
@@ -51,7 +52,6 @@ const AddImage = async (req, res) => {
 const AddRec = async (req, res) => {
   const id = req.query.id;
   const path = req.filePath;
-
   try {
     const image = await TowReceipt.create({
       src: path,
@@ -62,6 +62,7 @@ const AddRec = async (req, res) => {
       imageID: image.id,
     });
   } catch (error) {
+    console.log(error);
     res.status(400).json({
       message: "Image Not Added",
     });

@@ -3,7 +3,6 @@ const express = require("express");
 const { connectDatabase } = require("./db/connect");
 const app = express();
 const path = require("path");
-const pdfLib = require("pdf-lib");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");

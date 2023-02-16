@@ -187,6 +187,9 @@ module.exports = (sequelize, DataTypes) => {
       issuranceAccount: {
         type: DataTypes.STRING,
       },
+      poNo: {
+        type: DataTypes.STRING,
+      },
       amount: {
         type: DataTypes.INTEGER,
       },
