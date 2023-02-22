@@ -37,6 +37,7 @@ require("./api/towingCompanies/companyRoute")(app);
 require("./api/job/jobRoutes")(app);
 require("./api/Role/roleRoute")(app);
 require("./api/ImgReciepts/ImgRecRoutes")(app);
+require("./api/Email/EmailRoute")(app);
 connectDatabase();
 
 app.get("/api/serve/:imageName", (req, res) => {

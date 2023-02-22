@@ -124,7 +124,7 @@ const GetCompany = async (req, res) => {
           model: Rating,
           attributes: [
             [Sequelize.fn("AVG", Sequelize.col("rating")), "averageRating"],
-            [sequelize.fn("GROUP_CONCAT", sequelize.col("user")), "users"],
+            [sequelize.fn("GROUP_CONCAT", sequelize.col("user")), "users"]
           ],
           required: false,
           duplicating: false,
@@ -142,10 +142,63 @@ const GetCompany = async (req, res) => {
     });
   }
 };
+
+const GetSingleCompany=async(req,res) =>{
+  const id=req.query.id
+  try {
+    const companies = await Company.findOne({
+      where: { id: id },
+      include: [
+        {
+          model: TowingCompany,
+          attributes: ["name", "zipCode","address"],
+          group: ["companyId"],
+          limit: 1,
+        },
+        {
+          model: Rating,
+          attributes: [
+            [Sequelize.fn("AVG", Sequelize.col("rating")), "averageRating"],
+            [sequelize.fn("GROUP_CONCAT", sequelize.col("user")), "users"],
+          ],
+          required: false,
+          duplicating: false,
+          group: ["companyId"],
+        },
+      ],
+      group: ["company.id"],
+      // raw: true
+    });
+    res.status(200).json(companies);
+  } catch (error) {
+    
+  }
+}
+const updateCompanyDetails = async (req, res) => {
+  const companybody = req.body;
+  console.log(companybody);
+  try {
+    await Company.update(companybody, {
+      where: {
+        id: companybody.id,
+      },
+    });
+    res.status(200).json({
+      message: "Company Updated",
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: "Company Not Updated",
+    });
+  }
+};
+
 module.exports = {
   AddCompany,
   addrating,
   UpdateCompany,
   GetCompany,
   checkCompany,
+  GetSingleCompany,
+  updateCompanyDetails
 };

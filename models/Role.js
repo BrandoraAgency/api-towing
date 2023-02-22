@@ -51,12 +51,35 @@ module.exports = (sequelize, DataTypes) => {
       phone: {
         type: DataTypes.STRING(50),
       },
+      pricing_range: {
+        type: DataTypes.INTEGER,
+        defaultValue: 1,
+        validate: {
+          min: 1,
+          max: 5,
+        },
+      },
+      winch_out_fee: {
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: true,
+      },
+      hookup_fee: {
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: true,
+      },
+      miles_fee: {
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: true,
+      },
+      notes: {
+        type: DataTypes.STRING,
+      },
     },
     {
       tableName: "company",
       timestamps: false,
     }
-  );
+);
   const Rating = sequelize.define(
     "rating",
     {
