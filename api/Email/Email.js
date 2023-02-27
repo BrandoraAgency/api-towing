@@ -135,16 +135,30 @@ async function nodeMail(req, res, next) {
 }
 async function sendDispatch(req,res,next){
   const data = req.body;
-  console.log(data);
   const files = JSON.parse(JSON.stringify(req.files));
+  console.log(files);
   let attachments = [];
-  for (let file of files.files) {
-    const f = Buffer.from(file.data, "base64"); 
-    attachments.push({ 
-        filename: file.name,
+  try {
+    if(Array.isArray(files.files))
+    {
+      for (let file of files.files) {
+        const f = Buffer.from(file.data, "base64"); 
+        attachments.push({ 
+            filename: file.name,
+            content: f,
+            encoding: "base64",
+          });
+      }
+    }
+    else{
+      const f = Buffer.from(files.files.data, "base64"); 
+      attachments.push({ 
+        filename: files.files.name,
         content: f,
         encoding: "base64",
       });
+    }
+  } catch (error) {
   }
     // create reusable transporter object using the default SMTP transport
   // send mail with defined transport object
