@@ -149,8 +149,8 @@ async function sendDispatch(req,res,next){
     // create reusable transporter object using the default SMTP transport
   // send mail with defined transport object
   let mailOptions = {
-    from: `Towing Form <allstatetowform@gmail.com>`, // sender address
-    to: "masabm263@gmail.com", // list of receivers
+    from: `Dispatch Form <allstatetowform@gmail.com>`, // sender address
+    to: "allstatetowing001@gmail.com", // list of receivers
     subject: `Towing Job - Ticket ID ${data.ticket} `, // Subject line
     text: `Dispatch Form`, // plain text req.body
     html: `
