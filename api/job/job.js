@@ -9,11 +9,12 @@ const getJobs = async (req, res) => {
     let Jobs;
     if (req.session.user.role === "admin") {
       Jobs = await Job.findAll({
+        where: { isApproved: false },
         include: [{ model: TowingCompany }],
       });
     } else {
       Jobs = await Job.findAll({
-        where: { assignto: role },
+        where: { assignto: role,isApproved: false },
         include: [{ model: TowingCompany }],
       });
     }
@@ -34,10 +35,19 @@ const getJobs = async (req, res) => {
 const getApproved = async (req, res) => {
   const jobstatus = req.query.status;
   try {
-    const Jobs = await Job.findAll({
-      where: { jobStatus: jobstatus },
-      include: [{ model: TowingCompany }],
-    });
+  let Jobs;
+    if(jobstatus=='approved'){
+      Jobs = await Job.findAll({
+        where: { isApproved: true },
+        include: [{ model: TowingCompany }],
+      });
+    }
+    else{
+      Jobs = await Job.findAll({
+        where: { jobStatus: jobstatus },
+        include: [{ model: TowingCompany }],
+      });
+    }
     if (Jobs === null) {
       res.status(400).json({
         message: "Not Found",

@@ -1,6 +1,19 @@
 const nodemailer = require("nodemailer");
 const fs = require("fs");
 
+let transporter = nodemailer.createTransport({
+  host: "mail.ntl.lke.mybluehost.me",
+  port: 465,
+  secure: true, // true for 465, false for other ports
+  auth: {
+    user: "_mainaccount@ntl.lke.mybluehost.me", // generated ethereal user
+    pass: "Towing@123", // generated ethereal password
+  },
+  tls: {
+    rejectUnauthorized: false,
+  },
+});
+
 function sendmail(req, res) {
   res.status(200).send({ status: "ok" });
 }
@@ -16,19 +29,6 @@ async function nodeMail(req, res, next) {
   // Only needed if you don't have a real mail account for testing
 
   // create reusable transporter object using the default SMTP transport
-  let transporter = nodemailer.createTransport({
-    host: "mail.ntl.lke.mybluehost.me",
-    port: 465,
-    secure: true, // true for 465, false for other ports
-    auth: {
-      user: "_mainaccount@ntl.lke.mybluehost.me", // generated ethereal user
-      pass: "Towing@123", // generated ethereal password
-    },
-    tls: {
-      rejectUnauthorized: false,
-    },
-  });
-
   // send mail with defined transport object
   let mailOptions = {
     from: `Towing Form <allstatetowform@gmail.com>`, // sender address
@@ -133,7 +133,44 @@ async function nodeMail(req, res, next) {
     next();
   });
 }
+async function sendDispatch(req,res,next){
+  const data = req.body;
+  console.log(data);
+  const files = JSON.parse(JSON.stringify(req.files));
+  let attachments = [];
+  for (let file of files.files) {
+    const f = Buffer.from(file.data, "base64"); 
+    attachments.push({ 
+        filename: file.name,
+        content: f,
+        encoding: "base64",
+      });
+  }
+    // create reusable transporter object using the default SMTP transport
+  // send mail with defined transport object
+  let mailOptions = {
+    from: `Towing Form <allstatetowform@gmail.com>`, // sender address
+    to: "masabm263@gmail.com", // list of receivers
+    subject: `Towing Job - Ticket ID ${data.ticket} `, // Subject line
+    text: `Dispatch Form`, // plain text req.body
+    html: `
+    <h3>Ticket ID:</h3>
+    <p>${data.ticket}</p>
+    <h3>Job ID:</h3>
+    <p>${data.job}</p>
+    `, // html req.body
+    attachments: attachments
+  };
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log(error);
+      res.status(400).send({ status: "Not send" });
+    }
+    next();
+  });
+}
 module.exports = {
   sendmail,
   nodeMail,
+  sendDispatch
 };

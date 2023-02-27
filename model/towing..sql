@@ -71,3 +71,10 @@ CREATE TABLE IF NOT EXISTS logChanges(
     PRIMARY KEY (id),
     FOREIGN KEY (logId) REFERENCES jobLogs(id)
 );
+CREATE TABLE IF NOT EXISTS dipatchTicket(
+    id int NOT NULL AUTO_INCREMENT,
+    ticketNumber VARCHAR(255),
+    jobId INT,
+    PRIMARY KEY (id),
+    FOREIGN KEY (jobId) REFERENCES jobs(id)
+);
