@@ -79,7 +79,7 @@ module.exports = (sequelize, DataTypes) => {
       tableName: "company",
       timestamps: false,
     }
-);
+  );
   const Rating = sequelize.define(
     "rating",
     {
@@ -278,6 +278,30 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   Job.belongsTo(TowingCompany, { foreignKey: "towing_id" });
+  const DispatchTicket = sequelize.define('dispatchTicket', {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false
+    },
+    ticketNumber: {
+      type: DataTypes.STRING(255),
+      allowNull: false
+    },
+    jobId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'jobs',
+        key: 'id'
+      }
+    }
+  }, {
+    tableName: 'dispatchTicket',
+    timestamps: false
+  });
+  DispatchTicket.belongsTo(Job, { foreignKey: 'jobId' });
   const TowImage = sequelize.define(
     "towImage",
     {
@@ -393,6 +417,7 @@ module.exports = (sequelize, DataTypes) => {
     JobLog,
     LogChange,
     Company,
-    Rating
+    Rating,
+    DispatchTicket,
   };
 };

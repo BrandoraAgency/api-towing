@@ -38,6 +38,7 @@ require("./api/job/jobRoutes")(app);
 require("./api/Role/roleRoute")(app);
 require("./api/ImgReciepts/ImgRecRoutes")(app);
 require("./api/Email/EmailRoute")(app);
+require("./api/DispatchTicket/TicketRoutes")(app);
 connectDatabase();
 
 app.get("/api/serve/:imageName", (req, res) => {
@@ -49,8 +50,8 @@ app.get("/api/serve/:imageName", (req, res) => {
 app.get("/api", (req, res) => {
   res.json({ message: "Hello World!" });
 });
-// db.sequelize.sync().then((req)=>{
+db.sequelize.sync().then((req)=>{
   app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
   })
-// })
+})
