@@ -46,65 +46,10 @@ async function nodeMail(req, res, next) {
     to: "jamallogicbiz@gmail.com", // list of receivers
     subject: `Towing Job - ${data.firstName + data.lastName} - Ref ID `, // Subject line
     text: `Towing Form`, // plain text req.body
-    // html: `
-    // <h3>Reference ID:</h3>
-    // <p>${data.firstName + data.lastName}</p>
-    // <hr>
-    // <h3><strong>Latitude: </strong></h3>
-    // <p>${data.latitude}</p>
-    // <hr>
-    // <h3><strong>Longitude: </strong></h3>
-    // <p>${data.longitude}</p>
-    // <hr>
-    // <h3>Name:</h3>
-    // <p>${data.firstName + data.lastName}</p>
-    // <hr>
-    // <h3><strong>Email: </strong></h3>
-    // <p>${data.email}</p>
-    // <hr>
-    // <h3>Upload Photo ID - Front:</h3>
-    // <img style="width:200px;" src="cid:idf" />
-    // <hr>
-    // <h3>Upload Photo ID - Back:</h3>
-    // <img style="width:200px;" src="cid:idb" />
-    // <hr>
-    // <h3><strong>Type of Service: </strong></h3>
-    // <p>${data.service}</p>
-    // <hr>
-    // <h3><strong>miles: </strong></h3>
-    // <p>${data.miles}</p>
-    // <hr>
-    // <h3><strong>Cardholder Billing Address: </strong></h3>
-    // <p>${data.billAddress}</p>
-    // <hr>
-    // <h3><strong>Cardholder Billing Zip Code: </strong></h3>
-    // <p>${data.billZip}</p>
-    // <hr>
-    // <h3><strong>Payment Total Amount: </strong></h3>
-    // <p>${data.Amount}</p>
-    // <hr>
-    // <h3><strong>Upload Credit / Debit Card Front: </strong></h3>
-    // <img style="width:200px;" src="cid:cardF" />
-    // <hr>
-    // <h3><strong>Upload Credit / Debit Card Back: </strong></h3>
-    // <img style="width:200px;" src="cid:cardB" />
-    // <hr>
-    // <h3><strong>Agree : </strong></h3>
-    // <p>* I Authorize to charge my credit / debit card for agreed upon service offered. I understand
-    // this purchase is final. If additional fees are needed for any reason we will request, to
-    // complete services. I understand ETA's are an estimate and can change. I understand I will
-    // not be refunded once services are provided. Please be advised that there will be a 50% to
-    // 100% cancellation charge of full amount quoted, included in cancellation fee charge based on
-    // service(s) requested if I choose to cancel. This is subject to change but will be enforced when
-    // cancellation is due to but not limited to GOA, changing of service provider, or not needing
-    // service after a driver has been dispatched, or dispute of ETA time given being extended due
-    // to matters out of our control.</p>
-    // <hr>
-    // <h3><strong>Signature : </strong></h3>
-    // <img style="width:200px;" src="cid:my-image" />
-    //   `, // html req.body
-    html:
-    `
+    html: `
+    <h3>Reference ID:</h3>
+    <p>${data.firstName + data.lastName}</p>
+    <hr>
     <h3><strong>Latitude: </strong></h3>
     <p>${data.latitude}</p>
     <hr>
@@ -114,7 +59,50 @@ async function nodeMail(req, res, next) {
     <h3>Name:</h3>
     <p>${data.firstName + data.lastName}</p>
     <hr>
-    `,
+    <h3><strong>Email: </strong></h3>
+    <p>${data.email}</p>
+    <hr>
+    <h3>Upload Photo ID - Front:</h3>
+    <img style="width:200px;" src="cid:idf" />
+    <hr>
+    <h3>Upload Photo ID - Back:</h3>
+    <img style="width:200px;" src="cid:idb" />
+    <hr>
+    <h3><strong>Type of Service: </strong></h3>
+    <p>${data.service}</p>
+    <hr>
+    <h3><strong>miles: </strong></h3>
+    <p>${data.miles}</p>
+    <hr>
+    <h3><strong>Cardholder Billing Address: </strong></h3>
+    <p>${data.billAddress}</p>
+    <hr>
+    <h3><strong>Cardholder Billing Zip Code: </strong></h3>
+    <p>${data.billZip}</p>
+    <hr>
+    <h3><strong>Payment Total Amount: </strong></h3>
+    <p>${data.Amount}</p>
+    <hr>
+    <h3><strong>Upload Credit / Debit Card Front: </strong></h3>
+    <img style="width:200px;" src="cid:cardF" />
+    <hr>
+    <h3><strong>Upload Credit / Debit Card Back: </strong></h3>
+    <img style="width:200px;" src="cid:cardB" />
+    <hr>
+    <h3><strong>Agree : </strong></h3>
+    <p>* I Authorize to charge my credit / debit card for agreed upon service offered. I understand
+    this purchase is final. If additional fees are needed for any reason we will request, to
+    complete services. I understand ETA's are an estimate and can change. I understand I will
+    not be refunded once services are provided. Please be advised that there will be a 50% to
+    100% cancellation charge of full amount quoted, included in cancellation fee charge based on
+    service(s) requested if I choose to cancel. This is subject to change but will be enforced when
+    cancellation is due to but not limited to GOA, changing of service provider, or not needing
+    service after a driver has been dispatched, or dispute of ETA time given being extended due
+    to matters out of our control.</p>
+    <hr>
+    <h3><strong>Signature : </strong></h3>
+    <img style="width:200px;" src="cid:my-image" />
+      `, // html req.body
     // attachments: [
     //   {
     //     filename: "image.jpg",
