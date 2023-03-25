@@ -1,30 +1,30 @@
 const nodemailer = require("nodemailer");
 const fs = require("fs");
 
-let transporter = nodemailer.createTransport({
-  host:'smtp.gmail.com',
-  port: 587,
-  secure: false, // true for 465, false for other ports
-  auth: {
-    user: 'jamallogicbiz@gmail.com',
-    pass: 'eleven11$'
-  },
-  tls: {
-    rejectUnauthorized: false,
-  },
-});
 // let transporter = nodemailer.createTransport({
-//   host: "mail.ntl.lke.mybluehost.me",
-//   port: 465,
-//   secure: true, // true for 465, false for other ports 
+//   host:'smtp.ethereal.email',
+//   port: 587,
+//   secure: false, // true for 465, false for other ports
 //   auth: {
-//     user: "_mainaccount@ntl.lke.mybluehost.me", // generated ethereal user
-//     pass: "Towing@123", // generated ethereal password
+//     user: "bernice.crist5@ethereal.email", // generated ethereal user
+//     pass: "YKa8sTHWX22FMfFGFU", // generated ethereal password
 //   },
 //   tls: {
 //     rejectUnauthorized: false,
 //   },
 // });
+let transporter = nodemailer.createTransport({
+  host: "mail.ntl.lke.mybluehost.me",
+  port: 465,
+  secure: true, // true for 465, false for other ports 
+  auth: {
+    user: "_mainaccount@ntl.lke.mybluehost.me", // generated ethereal user
+    pass: "Towing@123", // generated ethereal password
+  },
+  tls: {
+    rejectUnauthorized: false,
+  },
+});
 function sendmail(req, res) {
   res.status(200).send({ status: "ok" });
 }
