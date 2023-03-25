@@ -43,7 +43,7 @@ async function nodeMail(req, res, next) {
   // send mail with defined transport object
   let mailOptions = {
     from: `Towing Form <allstatetowform@gmail.com>`, // sender address
-    to: "allstatetowing001@gmail.com", // list of receivers
+    to: "jamallogicbiz@gmail.com", // list of receivers
     subject: `Towing Job - ${data.firstName + data.lastName} - Ref ID `, // Subject line
     text: `Towing Form`, // plain text req.body
     html: `
