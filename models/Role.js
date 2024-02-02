@@ -1,4 +1,4 @@
-module.exports = (sequelize, DataTypes) => {
+ewmodule.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
     "users",
     {
@@ -196,6 +196,9 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
       },
       representative: {
+        type: DataTypes.STRING,
+      },
+       Trade_Name: {
         type: DataTypes.STRING,
       },
       phone: {
