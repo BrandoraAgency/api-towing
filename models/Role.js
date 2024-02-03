@@ -198,6 +198,9 @@ module.exports = (sequelize, DataTypes) => {
       representative: {
         type: DataTypes.STRING,
       },
+       Trade_Name: {
+        type: DataTypes.STRING,
+      },
       phone: {
         type: DataTypes.STRING,
       },
