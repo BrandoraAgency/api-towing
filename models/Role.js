@@ -199,10 +199,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
       },
       Trade_Name:{
-        type:DataTypes.SRING,
+        type:DataTypes.STRING,
       }
         ,
-          
+
       phone: {
         type: DataTypes.STRING,
       },
